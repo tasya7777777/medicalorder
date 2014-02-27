@@ -28,6 +28,7 @@ public class WelcomeController {
 	}
 
 	@RequestMapping(value = "/adminWelcome", method = RequestMethod.GET)
+	// add
 	public String getAdminWelcomePage() {
 		return "adminWelcome";
 	}
