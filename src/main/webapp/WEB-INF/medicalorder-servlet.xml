@@ -1,0 +1,51 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd 
+	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+
+	<import resource="dataContext.xml" />
+
+	<mvc:annotation-driven />
+	<mvc:default-servlet-handler />
+	<mvc:resources mapping="/resources/**"
+		location="/, classpath:/META-INF/resources/" />
+
+
+	<context:annotation-config />
+	<context:component-scan
+		base-package="com.epam.romanenko.domain.model, com.epam.romanenko.services, com.epam.romanenko.web" />
+
+	<context:property-placeholder location="classpath:jdbc.properties" />
+<!-- 
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/view/</value>
+		</property>
+		<property name="suffix">
+			<value>.jsp</value>
+		</property>
+	</bean> -->
+	<!-- 
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesViewResolver" /> -->
+	<bean id="viewResolver"
+    class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+    <property name="viewClass">
+        <value>
+            org.springframework.web.servlet.view.tiles2.TilesView
+        </value>
+    </property>
+</bean>
+	<bean class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/view/views.xml</value>
+				<!-- <value>/WEB-INF/view/**/views.xml</value> -->
+			</list>
+		</property>
+		
+	</bean>
+	
+</beans>
